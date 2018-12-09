@@ -7,6 +7,7 @@ provides infrastructure for the [W3C WebDriver specification](https://dvcs.w3.or
 major web browsers.
 
 Selenium's source code is made available under the [Apache 2.0 license](https://github.com/SeleniumHQ/selenium/blob/master/LICENSE).
+
 My personal resources are made available under the [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/).
 
 ## Documentation
