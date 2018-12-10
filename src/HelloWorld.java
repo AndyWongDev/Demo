@@ -4,8 +4,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class HelloWorld {
 
 	public static void main(String[] args) {
-		// TODO Selenium Code
-		
 		// Create Driver object
 		System.setProperty("webdriver.gecko.driver", "D:\\Coding\\Eclipse\\selenium-java\\geckodriver.exe");
 		
