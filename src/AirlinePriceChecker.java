@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 public class AirlinePriceChecker {
 
 	public static void main(String[] args) {
+		// Flight Preferences
+		String departureCity = "New York City";
+		String arrivingCity = "Tyler";
 		
 		// Create Driver object
 		System.setProperty("webdriver.gecko.driver", "D:\\Coding\\Eclipse\\selenium-java\\geckodriver.exe");
@@ -44,13 +47,43 @@ public class AirlinePriceChecker {
 	    driver.findElement(By.xpath("//div[@id='traveler-control-panel']//div[2]//div[1]//div[1]//button[1]")).click(); // Remove 1 Youth
 	    
 	    // Select Departure City via Dynamic Drop-down
+	    System.out.println("Dynamic Search - Destination");
 	    driver.findElement(By.id("flight-departure-airport0")).click();
 	    driver.findElement(By.id("flight-departure-airport0")).clear();
 	    driver.findElement(By.id("flight-departure-airport0")).sendKeys("N");
 	    
 	    // Store all dynamic search results into a list
-	    System.out.println("Dynamic Search");
 	    List<WebElement> departureDropdown = driver.findElements(By.xpath("//div[@id='flight-departure-airport0-dropdown']/div/div/div"));
-	    System.out.println("List: "+departureDropdown.get(0).getText());
-	  }
+	    
+	    List<String> departureList = new ArrayList<String>();
+	    for (int x = 0; x < departureDropdown.size(); x++) {
+	    	departureList.add(departureDropdown.get(x).getText());
+
+	    	if (departureList.get(x).contains(departureCity) == true) { 
+	    		String departureXPath = String.format("(//div[@class='sc-EHOje bDvOCu'])[%d]", x+1);
+	    		// Select "New York City" from Destination Drop-down
+	    		driver.findElement(By.xpath(departureXPath)).click();
+	    	}
+	    }
+	    
+	    // Select Arrival City via Dynamic Drop-down
+	    System.out.println("Dynamic Search - Arrival");
+	    driver.findElement(By.id("flight-arrival-airport0")).click();
+	    driver.findElement(By.id("flight-arrival-airport0")).clear();
+	    driver.findElement(By.id("flight-arrival-airport0")).sendKeys("T");
+	    
+	    // Store all dynamic search results into a list
+	    List<WebElement> arrivalDropdown = driver.findElements(By.xpath("//div[@id='flight-arrival-airport0-dropdown']/div/div/div"));
+	    
+	    List<String> arrivingList = new ArrayList<String>();
+	    for (int y = 0; y < arrivalDropdown.size(); y++) {
+	    	arrivingList.add(arrivalDropdown.get(y).getText());
+
+	    	if (arrivingList.get(y).contains(arrivingCity) == true) { 
+	    		String arrivingXPath = String.format("(//div[@class='sc-EHOje bDvOCu'])[%d]", y+1);
+	    		// Select "Tyler" from Destination Drop-down
+	    		driver.findElement(By.xpath(arrivingXPath)).click();
+	    	}
+	    }
+	}
 }
