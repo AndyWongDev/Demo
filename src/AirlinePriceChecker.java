@@ -13,7 +13,7 @@ public class AirlinePriceChecker {
 	public static void main(String[] args) {
 		// Flight Preferences
 		String departureCity = "New York City";
-		String arrivingCity = "Tyler";
+		String arrivalCity = "Tyler";
 		
 		// Create Driver object
 		System.setProperty("webdriver.gecko.driver", "D:\\Coding\\Eclipse\\selenium-java\\geckodriver.exe");
@@ -63,6 +63,7 @@ public class AirlinePriceChecker {
 	    		String departureXPath = String.format("(//div[@class='sc-EHOje bDvOCu'])[%d]", x+1);
 	    		// Select "New York City" from Destination Drop-down
 	    		driver.findElement(By.xpath(departureXPath)).click();
+	    		break;
 	    	}
 	    }
 	    
@@ -75,15 +76,29 @@ public class AirlinePriceChecker {
 	    // Store all dynamic search results into a list
 	    List<WebElement> arrivalDropdown = driver.findElements(By.xpath("//div[@id='flight-arrival-airport0-dropdown']/div/div/div"));
 	    
-	    List<String> arrivingList = new ArrayList<String>();
+	    List<String> arrivalList = new ArrayList<String>();
 	    for (int y = 0; y < arrivalDropdown.size(); y++) {
-	    	arrivingList.add(arrivalDropdown.get(y).getText());
+	    	arrivalList.add(arrivalDropdown.get(y).getText());
 
-	    	if (arrivingList.get(y).contains(arrivingCity) == true) { 
-	    		String arrivingXPath = String.format("(//div[@class='sc-EHOje bDvOCu'])[%d]", y+1);
+	    	if (arrivalList.get(y).contains(arrivalCity) == true) { 
+	    		String arrivalXPath = String.format("(//div[@class='sc-EHOje bDvOCu'])[%d]", y+1);
 	    		// Select "Tyler" from Destination Drop-down
-	    		driver.findElement(By.xpath(arrivingXPath)).click();
+	    		driver.findElement(By.xpath(arrivalXPath)).click();
+	    		break;
 	    	}
 	    }
+	    // Enable "Add a hotel" check box
+	    driver.findElement(By.name("Hotel")).click();
+	    
+	    // Add Flight Date Range
+	    driver.findElement(By.id("flight-date-range0")).click();
+	    // Store Months into list
+	    List<WebElement> calendarMonths = driver.findElements(By.className("Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb"));
+	    
+	    List<String> calendarList = new ArrayList<String>();
+	    for (int month = 0; month < calendarList.size(); month++) {
+	    	calendarList.add(calendarMonths.get(month).getText());
+	    }
+	    System.out.println(calendarList);
 	}
 }
