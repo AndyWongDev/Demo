@@ -99,6 +99,8 @@ public class AirlinePriceChecker {
 	    for (int month = 0; month < calendarList.size(); month++) {
 	    	calendarList.add(calendarMonths.get(month).getText());
 	    }
-	    System.out.println(calendarList);
+	    // Enter Flight Dates
+	    driver.findElement(By.id("flight-date-range0")).click();
+	    driver.findElement(By.xpath("//div[@class='Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb']"));
 	}
 }
