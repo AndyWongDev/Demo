@@ -92,15 +92,21 @@ public class AirlinePriceChecker {
 	    
 	    // Add Flight Date Range
 	    driver.findElement(By.id("flight-date-range0")).click();
-	    // Store Months into list
-	    List<WebElement> calendarMonths = driver.findElements(By.className("Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb"));
 	    
-	    List<String> calendarList = new ArrayList<String>();
-	    for (int month = 0; month < calendarList.size(); month++) {
-	    	calendarList.add(calendarMonths.get(month).getText());
-	    }
-	    // Enter Flight Dates
-	    driver.findElement(By.id("flight-date-range0")).click();
-	    driver.findElement(By.xpath("//div[@class='Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb']"));
+	    // Leaving May 1st and returning June 1st
+	    int calMonthDepart = 4;
+	    int calDayDepart = 1;
+	    int calMonthReturn = 5;
+	    int calDayReturn = 1;
+	    
+	    // Store Months into list (Removed, found better way)
+//	    List<WebElement> calendarMonths = driver.findElements(By.className("Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb"));
+//	    List<String> calendarList = new ArrayList<String>();
+//	    for (int month = 0; month < calendarList.size(); month++) {
+//	    	calendarList.add(calendarMonths.get(month).getText());}
+	    String calMonthXPath = "//div[@class='Month__MonthBox-bOrrcf isDAYa sc-bdVaJa ldJiqb']";
+	    String departDate = String.format("%s/div[%d]/div[contains(@class, 'Day__Cell-jjSasK eiPgNl sc-bdVaJa iadCde')][%d]", calMonthXPath, calMonthDepart, calDayDepart);
+	    
+	    driver.findElement(By.xpath(departDate)).click();
 	}
 }
